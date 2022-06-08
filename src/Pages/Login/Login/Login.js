@@ -5,17 +5,16 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import limg from "../../../images/login.png";
 import { Button, Container } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import Navigtaion from "../../Shared/Navigation/Navigtaion";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({});
   const { loginUser, singInWithGoogle } = useAuth();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate()
   const handelOnChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
@@ -23,8 +22,11 @@ const Login = () => {
     newLogin[field] = value;
     setLoginData(newLogin);
   };
+  const googleSing = ()  =>{
+    singInWithGoogle(location,navigate)
+  }
   const LoginFrom = (e) => {
-    loginUser(loginData.email, loginData.password, location, history);
+    loginUser(loginData.email, loginData.password, location, navigate);
     e.preventDefault();
     alert("login");
   };
@@ -63,7 +65,7 @@ const Login = () => {
                 Login
               </Button>
               <Button
-                onClick={singInWithGoogle}
+                onClick={googleSing}
                 sx={{ width: "75%", m: 1 }}
                 variant="contained"
               >

@@ -4,14 +4,13 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import limg from "../../../images/login.png";
 import { Alert, Box, Button, CircularProgress, Container } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Navigtaion from "../../Shared/Navigation/Navigtaion";
-import { useHistory } from "react-router-dom";
 
 const Regester = () => {
   const [loginData, setLoginData] = useState({});
-  const history = useHistory();
+  const navigate = useNavigate()
   const { RegisterUser, isLoading, user, error } = useAuth();
   const handelOnChange = (e) => {
     const field = e.target.name;
@@ -27,7 +26,7 @@ const Regester = () => {
       return;
     }
     e.preventDefault();
-    RegisterUser(loginData.email, loginData.password, loginData.name, history);
+    RegisterUser(loginData.email, loginData.password, loginData.name, navigate);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -80,7 +79,7 @@ const Regester = () => {
             {isLoading && <CircularProgress />}
             {user?.email && (
               <Alert severity="success">
-                This is a success alert — check it out!
+                You have Regester successfully
               </Alert>
             )}
             {error && <Alert severity="error">{error}</Alert>}

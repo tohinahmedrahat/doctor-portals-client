@@ -31,11 +31,15 @@ const Navigtaion = () => {
           <Link to="/appointment">
             <Button color="inherit">Appointment</Button>
           </Link>
-          {user.email?<Button onClick={logOut} color="inherit">Logout</Button> : <Link to="/login">
-            <Button color="inherit">Login</Button>
+          {user.email && <Link style={{color:"white"}} to="/dashboard">
+            <Button color="inherit">Dashboard</Button>
           </Link>
           
           }
+          {user.email?<Button onClick={logOut} color="inherit">Logout</Button> : <Link to="/login">
+            <Button color="inherit">Login</Button>
+          </Link>}
+          
         </Toolbar>
       </AppBar>
     </Box>
